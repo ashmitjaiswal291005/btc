@@ -40,7 +40,7 @@ function checkWallet(ck) {
 // Print the number of wallets scanned every 10 seconds
 setInterval(() => {
   console.log(`Scanned ${scannedCount} wallets so far...`);
-}, 60000);
+}, 10000);
 
 // Main function to generate, check, and count wallets
 function generate() {
