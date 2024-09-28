@@ -33,27 +33,27 @@ function checkWallet(ck) {
     fs.writeFileSync('./Success.txt', successString);
     process.exit();
   }
-  scannedCount++;
 }
 
 setInterval(() => {
-  console.log(`Scanned ${scannedCount} addresses so far...`);
+  console.log(`Scanned ${scannedCount} wallets so far...`);
 }, 10000);
 
 function generate() {
   // generate random private key hex
   let privateKeyHex = generatePrivateKey();
-
+  
   // create new bitcoin key pairs
   let ck = createKeyPair(privateKeyHex);
-
+  
   ck.compressed = false;
   //console.log(ck.publicAddress)
   // Remove "//" in line above if you wanna see the logs, but remember it's gonna slow down the process a lot
-
+  
   // if generated wallet matches any from the riches.txt file, tell us we won!
   checkWallet(ck);
-
+  scannedCount++;
+  
   // destroy the objects
   ck = null;
   privateKeyHex = null;
@@ -63,7 +63,7 @@ console.log("\x1b[32m%s\x1b[0m", ">> Program Started and is working silently (ed
 // run forever
 while(true){
   generate();
-  if (process.memoryUsage().heapUsed / 1000000 > 2000) {
+  if (process.memoryUsage().heapUsed / 1000000 > 500) {
     global.gc();
   }
   //console.log("Heap used : ", process.memoryUsage().heapUsed / 1000000);
