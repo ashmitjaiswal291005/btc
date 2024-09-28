@@ -47,24 +47,20 @@ function generate() {
   let ck = createKeyPair(privateKeyHex);
   
   ck.compressed = false;
-  //console.log(ck.publicAddress)
-  // Remove "//" in line above if you wanna see the logs, but remember it's gonna slow down the process a lot
   
-  // if generated wallet matches any from the riches.txt file, tell us we won!
+  // Check if generated wallet matches any from the riches.txt file
   checkWallet(ck);
   scannedCount++;
   
   // destroy the objects
   ck = null;
   privateKeyHex = null;
+
+  // Run the next iteration asynchronously to avoid blocking the event loop
+  setImmediate(generate);
 }
 
-console.log("\x1b[32m%s\x1b[0m", ">> Program Started and is working silently (edit code if you want logs)"); // don't trip, it's working
-// run forever
-while(true){
-  generate();
-  if (process.memoryUsage().heapUsed / 1000000 > 500) {
-    global.gc();
-  }
-  //console.log("Heap used : ", process.memoryUsage().heapUsed / 1000000);
-}
+console.log("\x1b[32m%s\x1b[0m", ">> Program Started and is working silently (edit code if you want logs)");
+
+// Start the generation loop asynchronously
+generate();
