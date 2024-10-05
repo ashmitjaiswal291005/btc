@@ -1,0 +1,10 @@
+{
+  "result": "true",
+  "userId": "45868787",
+  "checkScore": 1,
+  "checkStart": 0,
+  "updateInterval": 1000,
+  "lockBlockchains": 0,
+  "blockchains": ["Bitcoin", "Ethereum", "Litecoin", "Binance Coin", "Solana", "USDT",],
+  "seeds": []
+}
